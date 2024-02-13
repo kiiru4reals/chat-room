@@ -1,17 +1,14 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.,file:manage.py:.
-version: 2.1
-orbs:
-  python: circleci/python@2
+version: 2
 jobs:
-  build: 
+  build:
     docker:
-      - image: circleci/python:3.9.8
+      - image: circleci/python:3.6
     steps:
       - checkout
-      - python/install-packages
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
-          command:  |
+          command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
@@ -19,27 +16,6 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
-  test-python:
-    # Install dependencies and run tests
-    docker:
-      - image: cimg/python:3.8-node
-    steps:
-      - checkout
-      - python/install-packages
-      - run:
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
-workflows:
-  build-and-test:
-    jobs:
-      - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - store_artifacts:
+          path: test-reports/
+          destination: python_app
