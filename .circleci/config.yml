@@ -6,7 +6,7 @@ orbs:
 jobs:
   build: 
     docker:
-      - image: circleci/python:398
+      - image: circleci/python:3.9.8
     steps:
       - checkout
       - python/install-packages
