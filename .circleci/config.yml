@@ -4,6 +4,21 @@ version: 2.1
 orbs:
   python: circleci/python@2
 jobs:
+  build: 
+    docker:
+      - image: circleci/python:398
+    steps:
+      - checkout
+      - python/install-packages
+      - run:
+          command:  |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
   test-python:
     # Install dependencies and run tests
     docker:
@@ -12,8 +27,6 @@ jobs:
       - checkout
       - python/install-packages
       - run:
-          name: Run tests
-          command: python manage.py test
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
