@@ -78,7 +78,7 @@ jobs:
         run: docker build -t myapp .
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
       - name: Snyk Container monitor
-        run: snyk container monitor chat-room-server --file=Dockerfile
+        run: snyk container monitor myapp --file=Dockerfile
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
