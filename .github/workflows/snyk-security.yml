@@ -66,7 +66,7 @@ jobs:
 
         # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
       - name: Snyk Open Source monitor
-        run: snyk monitor --all-projects --debug
+        run: snyk monitor --all-projects
 
         # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
         # Use || true to not fail the pipeline.
