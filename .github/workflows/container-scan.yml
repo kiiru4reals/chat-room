@@ -31,4 +31,3 @@ jobs:
               uses: docker/scout-action@v1
               with:
                 command: recomendations
-                image: chat-room:latest
