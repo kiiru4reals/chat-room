@@ -32,4 +32,3 @@ jobs:
               with:
                 command: recomendations
                 image: chat-room:latest
-                ignore-unchanged: true
