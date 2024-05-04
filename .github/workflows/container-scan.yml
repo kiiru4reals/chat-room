@@ -26,3 +26,10 @@ jobs:
                 image: chat-room:latest
                 ignore-unchanged: true
                 only-severities: critical,high
+
+            - name: Provide recommendations
+              uses: docker/scout-action@v1
+              with:
+                command: reccomendations
+                image: chat-room:latest
+                ignore-unchanged: true
