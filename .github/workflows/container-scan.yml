@@ -30,6 +30,6 @@ jobs:
             - name: Provide recommendations
               uses: docker/scout-action@v1
               with:
-                command: reccomendations
+                command: recomendations
                 image: chat-room:latest
                 ignore-unchanged: true
