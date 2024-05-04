@@ -30,4 +30,4 @@ jobs:
             - name: Provide recommendations
               uses: docker/scout-action@v1
               with:
-                command: recomendations
+                command: recommendations
