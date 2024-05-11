@@ -23,13 +23,13 @@ jobs:
               env:
                 AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
                 AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-              run: terraform -chdir=${GITHUB_WORKSPACE}/gcp init -backend-config="access_key=$AWS_ACCESS_KEY" -backend-config="secret_key=$AWS_SECRET_KEY"
+              run: terraform -chdir=${GITHUB_WORKSPACE}/terraform init -backend-config="access_key=$AWS_ACCESS_KEY" -backend-config="secret_key=$AWS_SECRET_KEY"
 
             - name: Check formatting
-              run: terraform -chdir=${GITHUB_WORKSPACE}/gcp fmt -check
+              run: terraform -chdir=${GITHUB_WORKSPACE}/terraform fmt -check
             
             - name: Check for bugs
-              run: terraform -chdir=${GITHUB_WORKSPACE}/gcp validate
+              run: terraform -chdir=${GITHUB_WORKSPACE}/terraform validate
             
             - name: Decrypt service account key
               env:
@@ -42,6 +42,6 @@ jobs:
               env:
                 GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
               run: |
-                terraform -chdir=${GITHUB_WORKSPACE}/gcp plan \
-                -var path_to_gcp_service_account="${GITHUB_WORKSPACE}/gcp/key.json" \
+                terraform -chdir=${GITHUB_WORKSPACE}/terraform plan \
+                -var path_to_gcp_service_account="${GITHUB_WORKSPACE}/terraform/key.json" \
                 -var project_id=$GCP_PROJECT_ID
