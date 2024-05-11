@@ -2,7 +2,8 @@ name: Docker scout CVE scan
 
 on:
   pull_request:
-    branches: ["master"]
+    branches: 
+      - master
 jobs:
     scan-docker-image-for-vulnerabilities:
         runs-on: ubuntu-latest
