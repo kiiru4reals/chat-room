@@ -20,12 +20,48 @@ resource "google_cloud_run_v2_service" "chat-room-deployment" {
   template {
     containers {
       image = "docker.io/kiiru4reals/chat-room:latest"
+      ports {
+        name           = "http1"
+        container_port = 8000
+      }
       resources {
         limits = {
-          cpu    = "2"
-          memory = "2048Mi"
+          cpu    = "1"
+          memory = "512Mi"
         }
+        startup_cpu_boost = false
+        cpu_idle          = false
       }
     }
+    scaling {
+      min_instance_count = 0
+      max_instance_count = 1
+
+    }
+    timeout                          = "60.0s"
+    max_instance_request_concurrency = 5
+    execution_environment            = "EXECUTION_ENVIRONMENT_GEN1"
   }
 }
+
+resource "google_cloud_run_v2_service_iam_member" "allow-public-access" {
+  location = google_cloud_run_v2_service.chat-room-deployment.location
+  name     = google_cloud_run_v2_service.chat-room-deployment.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+
+}
+
+# Set up domain mapping manually
+# data "google_project" "project_info" {}
+
+# resource "google_" "chatroom-kiiru-maina-com" {
+#   name     = "chatroom.kiirumaina.com"
+#   location = google_cloud_run_v2_service.chat-room-deployment.location
+#   metadata {
+#     namespace = data.google_project.project_info.project_id
+#   }
+#   spec {
+#     route_name = google_cloud_run_v2_service.chat-room-deployment.name
+#   }
+# }
