@@ -38,7 +38,7 @@ resource "google_cloud_run_v2_service" "chat-room-deployment" {
       max_instance_count = 1
 
     }
-    timeout                          = "60.0s"
+    timeout                          = "60s"
     max_instance_request_concurrency = 5
     execution_environment            = "EXECUTION_ENVIRONMENT_GEN1"
   }
