@@ -28,7 +28,7 @@ def loginPage(request):
         try:
             user = User.objects.get(email=email)
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, 'Incorrect credentials.')
 
         user = authenticate(request, email=email, password=password)
 
