@@ -31,5 +31,6 @@ jobs:
                   context: .
                   file: ./Dockerfile
                   push: true
-                  tags: ${{ secrets.DOCKER_USERNAME }}/chat-room:${{env.COMMIT_SHA}}
-                  tags: ${{secrets.DOCKER_USERNAME}}/chat-room:latest # Second tag makes it easy to pull the image to deployment environment
+                  tags: | # Second tag makes it easy to pull the image to deployment environment
+                   ${{ secrets.DOCKER_USERNAME }}/chat-room:${{env.COMMIT_SHA}}
+                   ${{secrets.DOCKER_USERNAME}}/chat-room:latest 
