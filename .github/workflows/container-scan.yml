@@ -22,18 +22,20 @@ jobs:
 
             - name: Build Docker image
               uses: docker/build-push-action@v6
+              env:
+                IMAGE_NAME: test/chat-room
               with:
                 context: .
                 file: ./Dockerfile
                 sbom: true # Enable SBOM
                 push: false
-                tags: chat-room
+                tags: ${{ env.IMAGE_NAME }}
 
             - name: Check for CVEs on Docker scout
               uses: docker/scout-action@v1
               with:
                 command: cves
-                image: chat-room:latest
+                image: ${{ env.IMAGE_NAME }}
                 ignore-unchanged: true
                 only-severities: critical,high
 
