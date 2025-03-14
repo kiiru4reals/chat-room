@@ -30,6 +30,7 @@ jobs:
                 images: ${{ env.IMAGE_NAME }}
 
             - name: Build Docker image
+              id: build
               uses: docker/build-push-action@v6
               with:
                 context: .
@@ -42,7 +43,7 @@ jobs:
               uses: docker/scout-action@v1
               with:
                 command: cves
-                image: ${{ steps.meta.outputs.tags }}
+                image: ${{ steps.id.outputs.tags }}
                 ignore-unchanged: true
                 only-severities: critical,high
 
