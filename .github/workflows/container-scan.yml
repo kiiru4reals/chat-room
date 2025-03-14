@@ -27,7 +27,7 @@ jobs:
               id: meta
               uses: docker/metadata-action@v5
               with:
-                images: 
+                images: ${{ env.IMAGE_NAME }}
 
             - name: Build Docker image
               uses: docker/build-push-action@v6
@@ -37,6 +37,7 @@ jobs:
                 sbom: true # Enable SBOM
                 push: false
                 tags: ${{ steps.meta.outputs.tags }}
+
             - name: Check for CVEs on Docker scout
               uses: docker/scout-action@v1
               with:
