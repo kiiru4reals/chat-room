@@ -29,7 +29,7 @@ jobs:
               with:
                 images: ${{ env.IMAGE_NAME }}
 
-            - name: Build Docker image
+            - name: Build Docker image to get SBOM
               id: build
               uses: docker/build-push-action@v6
               with:
@@ -39,11 +39,14 @@ jobs:
                 push: false
                 tags: ${{ steps.meta.outputs.tags }}
 
+            - name: Build image (Dirty way to do scout)
+              run: docker build -t chat-room .
+
             - name: Check for CVEs on Docker scout
               uses: docker/scout-action@v1
               with:
                 command: cves
-                image: ${{ steps.id.outputs.tags }}
+                image: chat-room:latest
                 ignore-unchanged: true
                 only-severities: critical,high
 
