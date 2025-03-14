@@ -27,6 +27,7 @@ jobs:
                 file: ./Dockerfile
                 sbom: true # Enable SBOM
                 push: false
+                tags: chat-room
 
             - name: Check for CVEs on Docker scout
               uses: docker/scout-action@v1
