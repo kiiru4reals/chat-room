@@ -30,6 +30,7 @@ jobs:
               with:
                   context: .
                   file: ./Dockerfile
+                  sbom: true # Enable SBOM 
                   push: true
                   tags: | # Second tag makes it easy to pull the image to deployment environment
                    ${{ secrets.DOCKER_USERNAME }}/chat-room:${{env.COMMIT_SHA}}
