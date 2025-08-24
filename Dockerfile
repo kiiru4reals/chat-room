@@ -5,7 +5,7 @@
 # https://docs.docker.com/go/dockerfile-reference/
 
 ARG PYTHON_VERSION=3.12
-FROM python:${PYTHON_VERSION}-slim-bookworm as base
+FROM python:${PYTHON_VERSION}-slim-bookworm AS base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1

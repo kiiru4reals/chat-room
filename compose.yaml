@@ -1,5 +1,5 @@
 # Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Docker compose reference guide at
+# If you need more help, visit the Docker Compose reference guide at
 # https://docs.docker.com/go/compose-spec-reference/
 
 # Here the instructions define your application as a service called "server".
@@ -8,11 +8,20 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  server:
+  chatroom-server:
     build:
       context: .
-    ports:
-      - 8000:8000
+    container_name: studybud
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.django.rule=Host(`chatroom.kiirumaina.test`)"
+      - "traefik.http.services.django.loadbalancer.server.port=8000"
+      - "traefik.http.routers.django.entrypoints=web"
+networks:
+  traefik:
+    external: true
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
