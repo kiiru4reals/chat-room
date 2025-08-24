@@ -18,8 +18,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.django.rule=Host(`chatroom.kiirumaina.test`)"
       - "traefik.http.services.django.loadbalancer.server.port=8000"
-    ports:
-      - 8000:8000
+      - "traefik.http.routers.django.entrypoints=web"
 networks:
   traefik:
     external: true
