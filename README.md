@@ -40,9 +40,18 @@ pip install -r requirements.txt
 
 ```
 
-#
+### Running the App on Docker
+--> Run the application using the following command:
+```bash
+docker compose up -d --build
 
-### Running the App
+```
+Navigate to the application on `localhost:8000`
+
+If you have traefik ensure that traefik is running first then visit http://chatroom.kiirumaina.test
+
+
+### Running the App on PC
 
 --> To run the App, we use :
 ```bash
