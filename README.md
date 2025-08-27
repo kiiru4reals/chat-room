@@ -48,7 +48,7 @@ docker compose up -d --build
 ```
 Navigate to the application on `localhost:8000`
 
-If you have traefik ensure that traefik is running first then visit http://chatroom.kiirumaina.test
+If you have traefik ensure that traefik is running first then visit https://chatroom.docker.localhost
 
 
 ### Running the App on PC
