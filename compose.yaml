@@ -8,17 +8,18 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  chatroom-server:
+  chat-room:
     build:
       context: .
-    container_name: studybud
+    container_name: chat-room
+    restart: unless-stopped
     networks:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.django.rule=Host(`chatroom.kiirumaina.test`)"
+      - "traefik.http.routers.django.rule=Host(`chatroom.docker.localhost`)"
       - "traefik.http.services.django.loadbalancer.server.port=8000"
-      - "traefik.http.routers.django.entrypoints=web"
+      - "traefik.http.routers.django.entrypoints=websecure"
 networks:
   traefik:
     external: true
